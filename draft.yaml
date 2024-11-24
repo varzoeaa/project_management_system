@@ -1,0 +1,74 @@
+models:
+  Project:
+    id: bigIncrements
+    name: string
+    description: text
+    start_date: date
+    end_date: date nullable
+    status: enum['active', 'inactive', 'completed', 'on-hold', 'overdue'] 
+    client_id: id foreign nullable
+    timestamps: true
+  
+  Client:
+    id: bigIncrements
+    name: string
+    description: text nullable
+    payment_status: enum['paid', 'unpaid', 'partially-paid']
+    timestamps: true
+  
+  Category:
+    id: bigIncrements
+    name: string
+    description: text nullable
+    timestamps: true
+
+  ProjectCategory:
+    id: bigIncrements
+    category_id: id foreign
+    project_id: id foreign
+    timestamps: true
+  
+  Assignee:
+    id: bigIncrements
+    name: string
+    roles: text nullable
+    timestamps: true
+
+  ProjectAssignee:
+    id: bigIncrements
+    project_id: id foreign
+    assignee_id: id foreign
+    timestamps: true
+  
+  ProjectNote:
+    id: bigIncrements
+    project_id: id foreign
+    title: string
+    text: text
+    user_id: id foreign 
+    timestamps: true
+
+  Task:
+    id: bigIncrements
+    name: string
+    description: text
+    priority: string
+    deadline: datetime
+    status: enum['active', 'inactive', 'completed', 'on-hold', 'overdue']
+    project_id: id foreign
+    timestamps: true
+
+  TaskCategory:
+    id: bigIncrements
+    task_id: id foreign
+    category_id: id foreign
+    timestamps: true
+  
+  TaskNote:
+    id: bigIncrements
+    task_id: id foreign
+    title: string
+    text: text
+    user_id: id foreign 
+    timestamps: true
+  

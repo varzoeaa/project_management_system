@@ -1,0 +1,43 @@
+created:
+    - database/factories/ProjectFactory.php
+    - database/factories/ClientFactory.php
+    - database/factories/CategoryFactory.php
+    - database/factories/ProjectCategoryFactory.php
+    - database/factories/AssigneeFactory.php
+    - database/factories/ProjectAssigneeFactory.php
+    - database/factories/ProjectNoteFactory.php
+    - database/factories/TaskFactory.php
+    - database/factories/TaskCategoryFactory.php
+    - database/factories/TaskNoteFactory.php
+    - database/migrations/2024_11_19_211408_create_projects_table.php
+    - database/migrations/2024_11_19_211409_create_clients_table.php
+    - database/migrations/2024_11_19_211410_create_categories_table.php
+    - database/migrations/2024_11_19_211411_create_project_categories_table.php
+    - database/migrations/2024_11_19_211412_create_assignees_table.php
+    - database/migrations/2024_11_19_211413_create_project_assignees_table.php
+    - database/migrations/2024_11_19_211414_create_project_notes_table.php
+    - database/migrations/2024_11_19_211415_create_tasks_table.php
+    - database/migrations/2024_11_19_211416_create_task_categories_table.php
+    - database/migrations/2024_11_19_211417_create_task_notes_table.php
+    - app/Models/Project.php
+    - app/Models/Client.php
+    - app/Models/Category.php
+    - app/Models/ProjectCategory.php
+    - app/Models/Assignee.php
+    - app/Models/ProjectAssignee.php
+    - app/Models/ProjectNote.php
+    - app/Models/Task.php
+    - app/Models/TaskCategory.php
+    - app/Models/TaskNote.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable default:NULL', password: string, remember_token: 'string:100 nullable default:NULL' }
+    Project: { id: bigIncrements, name: string, description: text, start_date: date, end_date: 'date nullable', status: "enum['active', 'inactive', 'completed', 'on-hold', 'overdue']", client_id: 'id foreign nullable', timestamps: timestamps }
+    Client: { id: bigIncrements, name: string, description: 'text nullable', payment_status: "enum['paid', 'unpaid', 'partially-paid']", timestamps: timestamps }
+    Category: { id: bigIncrements, name: string, description: 'text nullable', timestamps: timestamps }
+    ProjectCategory: { id: bigIncrements, category_id: 'id foreign', project_id: 'id foreign', timestamps: timestamps }
+    Assignee: { id: bigIncrements, name: string, roles: 'text nullable', timestamps: timestamps }
+    ProjectAssignee: { id: bigIncrements, project_id: 'id foreign', assignee_id: 'id foreign', timestamps: timestamps }
+    ProjectNote: { id: bigIncrements, project_id: 'id foreign', title: string, text: text, user_id: 'id foreign', timestamps: timestamps }
+    Task: { id: bigIncrements, name: string, description: text, priority: string, deadline: datetime, status: "enum['active', 'inactive', 'completed', 'on-hold', 'overdue']", project_id: 'id foreign', timestamps: timestamps }
+    TaskCategory: { id: bigIncrements, task_id: 'id foreign', category_id: 'id foreign', timestamps: timestamps }
+    TaskNote: { id: bigIncrements, task_id: 'id foreign', title: string, text: text, user_id: 'id foreign', timestamps: timestamps }
